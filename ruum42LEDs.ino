@@ -28,7 +28,7 @@ void loop() {
   else {
     leds.fadeToBlackBy(255);
     FastLED.show();
-    delay(1000);
+    delay(100);
   }
 }
 
