@@ -28,21 +28,19 @@ void loop() {
   else {
     leds.fadeToBlackBy(255);
     FastLED.show();
+    delay(1000);
   }
 }
 
 void snake(int durchlauf, int zeit, int aus) {
   int anzahl = 0;
   do {
-    anzahl = anzahl + 1;
+    ++anzahl;
     for (int i = 0; i < NUM_LEDS; i++) {
       leds.fadeToBlackBy(aus);
       leds[i] = CHSV(hue++, 255, 255);
       FastLED.show();
-      if (digitalRead(OnSwitch) == HIGH) {
-        anzahl = durchlauf;
-        i = NUM_LEDS;
-      }
+      if (digitalRead(OnSwitch) == HIGH) return;
       delay(zeit);
     }
   } while (anzahl < durchlauf);
@@ -51,16 +49,13 @@ void snake(int durchlauf, int zeit, int aus) {
 void richtng2(int durchlauf, int zeit, int aus) {
   int anzahl = 0;
   do {
-    anzahl = anzahl + 1;
+    ++anzahl;
     for (int i = 0; i < NUM_LEDS / 2; i++) {
       leds.fadeToBlackBy(aus);
       leds[i] = CHSV(hue++, 255, 255);
       leds[i + NUM_LEDS / 2] = CHSV(hue++, 255, 255);
       FastLED.show();
-      if (digitalRead(OnSwitch) == HIGH) {
-        anzahl = durchlauf;
-        i = NUM_LEDS / 2;
-      }
+      if (digitalRead(OnSwitch) == HIGH) return;
       delay(zeit);
     }
   } while (anzahl < durchlauf);
@@ -69,16 +64,13 @@ void richtng2(int durchlauf, int zeit, int aus) {
 void richtng(int durchlauf, int zeit, int aus) {
   int anzahl = 0;
   do {
-    anzahl = anzahl + 1;
+    ++anzahl;
     for (int i = 0; i < NUM_LEDS / 2; i++) {
       leds.fadeToBlackBy(aus);
       leds[i] = CHSV(hue++, 255, 255);
       leds[NUM_LEDS - 5 - i] = CHSV(hue++, 255, 255);
       FastLED.show();
-      if (digitalRead(OnSwitch) == HIGH) {
-        anzahl = durchlauf;
-        i = NUM_LEDS / 2;
-      }
+      if (digitalRead(OnSwitch) == HIGH) return;
       delay(zeit);
     }
   } while (anzahl < durchlauf);
@@ -88,15 +80,14 @@ void farbe(int durchlauf, int zeit) {
   int anzahl = 0;
   int color = 40;
   do {
-    anzahl = anzahl + 1;
-    color = color + 1;
+    ++anzahl;
+    ++color;
     for (int i = 0; i < NUM_LEDS; i++) {
       leds[i] = CHSV(color, 255, 255);
     }
     FastLED.show();
-    if (digitalRead(OnSwitch) == HIGH) {
-      anzahl = anzahl + durchlauf;
-    }
+    if (digitalRead(OnSwitch) == HIGH) return;
+
     delay(zeit);
   } while (anzahl < durchlauf);
 }
@@ -104,13 +95,11 @@ void farbe(int durchlauf, int zeit) {
 void rainbow(int durchlauf, int zeit) {
   int anzahl = 0;
   do {
-    anzahl = anzahl + 1;
+    ++anzahl;
     fill_rainbow(leds, NUM_LEDS, --hue + 5, 5);
     FastLED.show();
-    if (digitalRead(OnSwitch) == HIGH) {
-      anzahl = anzahl + durchlauf * 10;
-    }
+    if (digitalRead(OnSwitch) == HIGH) return;
+
     delay(zeit);
   } while (anzahl < durchlauf * 10);
 }
-
