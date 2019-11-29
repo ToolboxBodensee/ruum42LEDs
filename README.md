@@ -1,5 +1,7 @@
 # ruum42LEDs
 
+**Entwicklung nur auf [GitLab](https://gitlab.com/ToolboxBodensee/die-erleuchteten/ruum42LEDs). Auf GitHub befindet sich lediglich ein Mirror**
+
 This code runs on an Arduino Uno, which controls the RGB Led Strip in our main meeting room.
 
 Pinout: 
